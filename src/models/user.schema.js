@@ -69,7 +69,6 @@ userSchema.methods={
 
     return forgotToken
   }
-
 }
 
 
