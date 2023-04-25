@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import AuthRoles from "../utils/authRoles";
+import bcrypt from "bcryptjs"
 
 const userSchema=new  mongoose.Schema(
     {
@@ -38,5 +39,14 @@ userSchema.pre("save", async function(next){
     this.password= await bcrypt.hash(this.password, 10)
     next()
 })
+
+userSchema.methods={
+  // compare password
+  comparePassword:async function(enteredPasword){
+    return await bcrypt.compare(enteredPasword, this.password)
+  }
+
+}
+
 
 export default mongoose.model("User",userSchema)
