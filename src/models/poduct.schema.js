@@ -33,6 +33,7 @@ const productSchema = new mongoose.Schema({
         default:0
     },
     collectionId:{
+        type: moongose.Schema.Types.ObjectId,
         ref:"Collection"
     }
 },{timestamos:true}
