@@ -45,3 +45,34 @@ export const UpdateCollection= asyncHandler(async (req,res)=>{
         collection
     })
 })
+
+export const deleteCollection= asyncHandler(async (req,res)=>{
+   
+    const {id:collectionId}=req.params 
+    
+    const collectionToDelete=Collection.findById(collectionId)
+
+    if(!collectionToDelete){
+        throw new CustomError("Collection to be deleted not found",401)
+    }
+    
+    await collectionToDelete.remove()
+
+    res.status(200).json({
+        success:true,
+        message:"Collection deleted successfullly",
+    })
+})
+
+export const getAllCollection= asyncHandler(async (req,res)=>{
+    
+    const collections=Collection.find()
+
+    if(!collections){
+        throw new CustomError("No Collection found",401)
+    }
+    res.status(200).json({
+        success:true,
+        message:"Collection deleted successfullly",
+    })
+})
